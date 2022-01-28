@@ -23,7 +23,7 @@
  *
  */
 
-package java.util;
+package com.th3ee9ine.java.util;
 
 import java.util.function.Predicate;
 import java.util.stream.Stream;

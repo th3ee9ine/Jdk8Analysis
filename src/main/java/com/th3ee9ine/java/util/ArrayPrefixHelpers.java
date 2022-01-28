@@ -22,7 +22,7 @@
  *
  *
  */
-package java.util;
+package com.th3ee9ine.java.util;
 
 /*
  * Written by Doug Lea with assistance from members of JCP JSR-166

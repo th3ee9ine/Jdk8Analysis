@@ -24,7 +24,7 @@
  *
  */
 
-package java.util;
+package com.th3ee9ine.java.util;
 
 /**
  * This is a near duplicate of {@link TimSort}, modified for use with

@@ -33,7 +33,7 @@
  * http://creativecommons.org/publicdomain/zero/1.0/
  */
 
-package java.util;
+package com.th3ee9ine.java.util;
 
 /**
  * This class provides skeletal implementations of some {@link Queue}

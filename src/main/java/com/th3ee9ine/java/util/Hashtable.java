@@ -23,7 +23,7 @@
  *
  */
 
-package java.util;
+package com.th3ee9ine.java.util;
 
 import java.io.*;
 import java.util.concurrent.ThreadLocalRandom;

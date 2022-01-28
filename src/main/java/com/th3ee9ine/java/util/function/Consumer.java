@@ -22,7 +22,7 @@
  *
  *
  */
-package java.util.function;
+package com.th3ee9ine.java.util.function;
 
 import java.util.Objects;
 

@@ -23,7 +23,7 @@
  *
  */
 
-package java.util;
+package com.th3ee9ine.java.util;
 
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;

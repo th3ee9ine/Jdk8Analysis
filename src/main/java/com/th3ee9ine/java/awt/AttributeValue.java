@@ -23,7 +23,7 @@
  *
  */
 
-package java.awt;
+package com.th3ee9ine.java.awt;
 
 import sun.util.logging.PlatformLogger;
 

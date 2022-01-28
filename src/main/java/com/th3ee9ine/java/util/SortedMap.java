@@ -23,7 +23,7 @@
  *
  */
 
-package java.util;
+package com.th3ee9ine.java.util;
 
 /**
  * A {@link Map} that further provides a <em>total ordering</em> on its keys.

@@ -23,7 +23,7 @@
  *
  */
 
-package java.io;
+package com.th3ee9ine.java.io;
 
 /**
  * Signals that an I/O exception of some sort has occurred. This
@@ -35,8 +35,7 @@ package java.io;
  * @see     java.io.OutputStream
  * @since   JDK1.0
  */
-public
-class IOException extends Exception {
+public class IOException extends Exception {
     static final long serialVersionUID = 7818375828146090155L;
 
     /**

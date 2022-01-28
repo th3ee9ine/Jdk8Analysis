@@ -23,7 +23,7 @@
  *
  */
 
-package java.io;
+package com.th3ee9ine.java.io;
 
 /**
  * The class implements a buffered output stream. By setting up such

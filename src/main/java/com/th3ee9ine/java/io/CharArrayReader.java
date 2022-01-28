@@ -23,7 +23,7 @@
  *
  */
 
-package java.io;
+package com.th3ee9ine.java.io;
 
 /**
  * This class implements a character buffer that can be used as a

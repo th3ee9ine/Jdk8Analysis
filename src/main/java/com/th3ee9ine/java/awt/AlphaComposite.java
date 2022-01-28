@@ -23,7 +23,7 @@
  *
  */
 
-package java.awt;
+package com.th3ee9ine.java.awt;
 
 import java.awt.image.ColorModel;
 import java.lang.annotation.Native;

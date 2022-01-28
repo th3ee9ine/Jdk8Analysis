@@ -23,7 +23,7 @@
  *
  */
 
-package java.awt;
+package com.th3ee9ine.java.awt;
 
 /**
  * Thrown when a serious Abstract Window Toolkit error has occurred.

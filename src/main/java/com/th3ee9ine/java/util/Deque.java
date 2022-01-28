@@ -33,7 +33,7 @@
  * at http://creativecommons.org/publicdomain/zero/1.0/
  */
 
-package java.util;
+package com.th3ee9ine.java.util;
 
 /**
  * A linear collection that supports element insertion and removal at

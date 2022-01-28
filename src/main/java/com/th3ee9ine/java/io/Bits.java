@@ -23,7 +23,7 @@
  *
  */
 
-package java.io;
+package com.th3ee9ine.java.io;
 
 /**
  * Utility methods for packing/unpacking primitive values in/out of byte arrays
