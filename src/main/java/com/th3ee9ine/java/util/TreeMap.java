@@ -165,30 +165,24 @@ public class TreeMap<K,V> extends AbstractMap<K,V>
     }
 
     /**
-     * Returns the value to which the specified key is mapped,
-     * or {@code null} if this map contains no mapping for the key.
+     * 根据指定的 key 返回 value。
+     * 更准确的说：
+     *      如果此 TreeMap 包含 key 所对应的 Entry(最多只会有一个这样的映射)，
+     *      且可以根据比较器(comparator)判断，key 与 Entry.key 相等，
+     *      则返回 Entry.value，否则返回 null。
+     * 所以说，返回 null 的情况可以区分为两种：
+     *      第一种：key 所对应的 Entry 不存在。
+     *      第二种：key 所对应的 Entry 存在，但是根据比较器(comparator)判断，key 与 Entry.key 不相等。
+     * TreeMap.containsKey() 方法可以判断 TreeMap 中是否包含 key 所对应的 Entry，可以使用该方法区分上面两种情况。
      *
-     * <p>More formally, if this map contains a mapping from a key
-     * {@code k} to a value {@code v} such that {@code key} compares
-     * equal to {@code k} according to the map's ordering, then this
-     * method returns {@code v}; otherwise it returns {@code null}.
-     * (There can be at most one such mapping.)
-     *
-     * <p>A return value of {@code null} does not <em>necessarily</em>
-     * indicate that the map contains no mapping for the key; it's also
-     * possible that the map explicitly maps the key to {@code null}.
-     * The {@link #containsKey containsKey} operation may be used to
-     * distinguish these two cases.
-     *
-     * @throws ClassCastException if the specified key cannot be compared
-     *         with the keys currently in the map
-     * @throws NullPointerException if the specified key is null
-     *         and this map uses natural ordering, or its comparator
-     *         does not permit null keys
+     * @throws ClassCastException 如果指定的 key 无法与 TreeMap 中的 key 进行比较。
+     * @throws NullPointerException 如果指定的 key 为 null 并且 TreeMap 使用默认比较器，或者比较器不允许 key 为 null。
      */
     @Override
     public V get(Object key) {
+        // 根据 key 获取对应的 Entry
         Entry<K,V> p = getEntry(key);
+        // 如果 p 不等于 null，则返回 p.value
         return (p==null ? null : p.value);
     }
 
