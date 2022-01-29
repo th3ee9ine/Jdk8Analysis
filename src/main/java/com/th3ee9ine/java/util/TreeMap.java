@@ -41,19 +41,6 @@ import java.util.function.Consumer;
  */
 public class TreeMap<K,V> extends AbstractMap<K,V>
         implements NavigableMap<K,V>, Cloneable, Serializable {
-    public static void main(String[] args) {
-        TreeMap<Integer, Integer> treeMap = new TreeMap();
-        treeMap.put(1, 2);
-        treeMap.put(2, 3);
-        treeMap.put(4, 5);
-        treeMap.put(5, 6);
-        treeMap.put(6, 7);
-        treeMap.put(7, 8);
-        treeMap.put(8, 9);
-        treeMap.put(9, 10);
-        System.out.println(treeMap.containsValue(0));
-    }
-
     /**
      * 比较器，如果没有自定义比较器，则为 null。
      * 默认按照 key 的自然顺序进行排序。
@@ -228,20 +215,25 @@ public class TreeMap<K,V> extends AbstractMap<K,V>
      */
     @Override
     public void putAll(Map<? extends K, ? extends V> map) {
+        // 1、获取指定的 map 的大小
         int mapSize = map.size();
+        // 2、判断此 TreeMap 是否不存在任何节点，且指定的 map 是 SortedMap 的实现类
         if (size==0 && mapSize!=0 && map instanceof SortedMap) {
+            // 2.1、将 map 的比较器赋值给 c
             Comparator<?> c = ((SortedMap<?,?>)map).comparator();
+            // 2.2、如果 c 与 comparator 相等，则调用 buildFromSorted 方法，构建 TreeMap
             if (c == comparator || (c != null && c.equals(comparator))) {
+                // 2.2.1、对树结构修改次数+1
                 ++modCount;
                 try {
                     buildFromSorted(mapSize, map.entrySet().iterator(),
                                     null, null);
-                } catch (java.io.IOException cannotHappen) {
-                } catch (ClassNotFoundException cannotHappen) {
+                } catch (IOException | ClassNotFoundException cannotHappen) {
                 }
                 return;
             }
         }
+        // 3、否则调用 AbstractMap.putAll 方法，将 map 中的元素添加到当前 TreeMap 中
         super.putAll(map);
     }
 
