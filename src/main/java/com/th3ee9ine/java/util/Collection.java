@@ -25,6 +25,7 @@
 
 package com.th3ee9ine.java.util;
 
+import java.util.Spliterators;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;

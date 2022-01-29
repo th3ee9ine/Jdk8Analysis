@@ -23,7 +23,7 @@
  *
  */
 
-package java.util.zip;
+package com.th3ee9ine.java.util.zip;
 
 /**
  * An interface representing a data checksum.

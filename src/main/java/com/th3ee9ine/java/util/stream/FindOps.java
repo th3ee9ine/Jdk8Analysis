@@ -22,16 +22,16 @@
  *
  *
  */
-package java.util.stream;
+package com.th3ee9ine.java.util.stream;
 
-import java.util.Optional;
-import java.util.OptionalDouble;
-import java.util.OptionalInt;
-import java.util.OptionalLong;
-import java.util.Spliterator;
-import java.util.concurrent.CountedCompleter;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
+import com.th3ee9ine.java.util.Optional;
+import com.th3ee9ine.java.util.OptionalDouble;
+import com.th3ee9ine.java.util.OptionalInt;
+import com.th3ee9ine.java.util.OptionalLong;
+import com.th3ee9ine.java.util.Spliterator;
+import com.th3ee9ine.java.util.concurrent.CountedCompleter;
+import com.th3ee9ine.java.util.function.Predicate;
+import com.th3ee9ine.java.util.function.Supplier;
 
 /**
  * Factory for instances of a short-circuiting {@code TerminalOp} that searches

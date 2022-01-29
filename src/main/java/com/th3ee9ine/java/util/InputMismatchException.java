@@ -23,7 +23,7 @@
  *
  */
 
-package java.util;
+package com.th3ee9ine.java.util;
 
 /**
  * Thrown by a <code>Scanner</code> to indicate that the token

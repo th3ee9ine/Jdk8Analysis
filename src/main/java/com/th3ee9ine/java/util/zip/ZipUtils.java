@@ -23,11 +23,11 @@
  *
  */
 
-package java.util.zip;
+package com.th3ee9ine.java.util.zip;
 
-import java.nio.file.attribute.FileTime;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
+import com.th3ee9ine.java.nio.file.attribute.FileTime;
+import com.th3ee9ine.java.util.Date;
+import com.th3ee9ine.java.util.concurrent.TimeUnit;
 
 class ZipUtils {
 

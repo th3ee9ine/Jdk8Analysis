@@ -22,7 +22,7 @@
  *
  *
  */
-package java.util.stream;
+package com.th3ee9ine.java.util.stream;
 
 import java.util.LongSummaryStatistics;
 import java.util.Objects;

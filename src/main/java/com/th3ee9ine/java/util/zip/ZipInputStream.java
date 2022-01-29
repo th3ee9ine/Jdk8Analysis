@@ -23,16 +23,16 @@
  *
  */
 
-package java.util.zip;
+package com.th3ee9ine.java.util.zip;
 
-import java.io.InputStream;
-import java.io.IOException;
-import java.io.EOFException;
-import java.io.PushbackInputStream;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import static java.util.zip.ZipConstants64.*;
-import static java.util.zip.ZipUtils.*;
+import com.th3ee9ine.java.io.InputStream;
+import com.th3ee9ine.java.io.IOException;
+import com.th3ee9ine.java.io.EOFException;
+import com.th3ee9ine.java.io.PushbackInputStream;
+import com.th3ee9ine.java.nio.charset.Charset;
+import com.th3ee9ine.java.nio.charset.StandardCharsets;
+import static com.th3ee9ine.java.util.zip.ZipConstants64.*;
+import static com.th3ee9ine.java.util.zip.ZipUtils.*;
 
 /**
  * This class implements an input stream filter for reading files in the

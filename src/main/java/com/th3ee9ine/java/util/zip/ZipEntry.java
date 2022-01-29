@@ -23,12 +23,12 @@
  *
  */
 
-package java.util.zip;
+package com.th3ee9ine.java.util.zip;
 
-import static java.util.zip.ZipUtils.*;
-import java.nio.file.attribute.FileTime;
-import java.util.Objects;
-import java.util.concurrent.TimeUnit;
+import static com.th3ee9ine.java.util.zip.ZipUtils.*;
+import com.th3ee9ine.java.nio.file.attribute.FileTime;
+import com.th3ee9ine.java.util.Objects;
+import com.th3ee9ine.java.util.concurrent.TimeUnit;
 
 import static java.util.zip.ZipConstants64.*;
 

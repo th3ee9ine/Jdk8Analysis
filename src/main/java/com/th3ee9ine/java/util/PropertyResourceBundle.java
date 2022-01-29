@@ -37,7 +37,7 @@
  * Taligent is a registered trademark of Taligent, Inc.
  */
 
-package java.util;
+package com.th3ee9ine.java.util;
 
 import java.io.InputStream;
 import java.io.Reader;

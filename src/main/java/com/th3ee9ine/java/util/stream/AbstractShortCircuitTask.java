@@ -22,10 +22,10 @@
  *
  *
  */
-package java.util.stream;
+package com.th3ee9ine.java.util.stream;
 
-import java.util.Spliterator;
-import java.util.concurrent.atomic.AtomicReference;
+import com.th3ee9ine.java.util.Spliterator;
+import com.th3ee9ine.java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Abstract class for fork-join tasks used to implement short-circuiting

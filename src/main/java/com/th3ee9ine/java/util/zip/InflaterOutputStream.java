@@ -23,11 +23,11 @@
  *
  */
 
-package java.util.zip;
+package com.th3ee9ine.java.util.zip;
 
-import java.io.FilterOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import com.th3ee9ine.java.io.FilterOutputStream;
+import com.th3ee9ine.java.io.IOException;
+import com.th3ee9ine.java.io.OutputStream;
 
 /**
  * Implements an output stream filter for uncompressing data stored in the

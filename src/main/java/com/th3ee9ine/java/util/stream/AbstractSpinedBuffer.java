@@ -22,7 +22,7 @@
  *
  *
  */
-package java.util.stream;
+package com.th3ee9ine.java.util.stream;
 
 /**
  * Base class for a data structure for gathering elements into a buffer and then

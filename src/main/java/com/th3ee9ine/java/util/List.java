@@ -23,9 +23,9 @@
  *
  */
 
-package java.util;
+package com.th3ee9ine.java.util;
 
-import java.util.function.UnaryOperator;
+import com.th3ee9ine.java.util.function.UnaryOperator;
 
 /**
  * An ordered collection (also known as a <i>sequence</i>).  The user of this

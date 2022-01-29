@@ -23,7 +23,7 @@
  *
  */
 
-package java.util;
+package com.th3ee9ine.java.util;
 
 /**
  * A {@link Set} that further provides a <i>total ordering</i> on its elements.

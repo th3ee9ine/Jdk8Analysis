@@ -23,7 +23,7 @@
  *
  */
 
-package java.util;
+package com.th3ee9ine.java.util;
 
 import java.lang.ref.WeakReference;
 import java.lang.ref.ReferenceQueue;

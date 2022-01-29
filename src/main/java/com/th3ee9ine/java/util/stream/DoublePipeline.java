@@ -22,26 +22,26 @@
  *
  *
  */
-package java.util.stream;
+package com.th3ee9ine.java.util.stream;
 
-import java.util.DoubleSummaryStatistics;
-import java.util.Objects;
-import java.util.OptionalDouble;
-import java.util.PrimitiveIterator;
-import java.util.Spliterator;
-import java.util.Spliterators;
-import java.util.function.BiConsumer;
-import java.util.function.BinaryOperator;
-import java.util.function.DoubleBinaryOperator;
-import java.util.function.DoubleConsumer;
-import java.util.function.DoubleFunction;
-import java.util.function.DoublePredicate;
-import java.util.function.DoubleToIntFunction;
-import java.util.function.DoubleToLongFunction;
-import java.util.function.DoubleUnaryOperator;
-import java.util.function.IntFunction;
-import java.util.function.ObjDoubleConsumer;
-import java.util.function.Supplier;
+import com.th3ee9ine.java.util.DoubleSummaryStatistics;
+import com.th3ee9ine.java.util.Objects;
+import com.th3ee9ine.java.util.OptionalDouble;
+import com.th3ee9ine.java.util.PrimitiveIterator;
+import com.th3ee9ine.java.util.Spliterator;
+import com.th3ee9ine.java.util.Spliterators;
+import com.th3ee9ine.java.util.function.BiConsumer;
+import com.th3ee9ine.java.util.function.BinaryOperator;
+import com.th3ee9ine.java.util.function.DoubleBinaryOperator;
+import com.th3ee9ine.java.util.function.DoubleConsumer;
+import com.th3ee9ine.java.util.function.DoubleFunction;
+import com.th3ee9ine.java.util.function.DoublePredicate;
+import com.th3ee9ine.java.util.function.DoubleToIntFunction;
+import com.th3ee9ine.java.util.function.DoubleToLongFunction;
+import com.th3ee9ine.java.util.function.DoubleUnaryOperator;
+import com.th3ee9ine.java.util.function.IntFunction;
+import com.th3ee9ine.java.util.function.ObjDoubleConsumer;
+import com.th3ee9ine.java.util.function.Supplier;
 
 /**
  * Abstract base class for an intermediate pipeline stage or pipeline source

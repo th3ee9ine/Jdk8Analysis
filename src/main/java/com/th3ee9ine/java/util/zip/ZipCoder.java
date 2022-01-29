@@ -23,17 +23,17 @@
  *
  */
 
-package java.util.zip;
+package com.th3ee9ine.java.util.zip;
 
-import java.nio.ByteBuffer;
-import java.nio.CharBuffer;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.nio.charset.CharsetDecoder;
-import java.nio.charset.CharsetEncoder;
-import java.nio.charset.CoderResult;
-import java.nio.charset.CodingErrorAction;
-import java.util.Arrays;
+import com.th3ee9ine.java.nio.ByteBuffer;
+import com.th3ee9ine.java.nio.CharBuffer;
+import com.th3ee9ine.java.nio.charset.Charset;
+import com.th3ee9ine.java.nio.charset.StandardCharsets;
+import com.th3ee9ine.java.nio.charset.CharsetDecoder;
+import com.th3ee9ine.java.nio.charset.CharsetEncoder;
+import com.th3ee9ine.java.nio.charset.CoderResult;
+import com.th3ee9ine.java.nio.charset.CodingErrorAction;
+import com.th3ee9ine.java.util.Arrays;
 import sun.nio.cs.ArrayDecoder;
 import sun.nio.cs.ArrayEncoder;
 

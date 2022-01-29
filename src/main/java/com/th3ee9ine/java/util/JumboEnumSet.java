@@ -23,7 +23,7 @@
  *
  */
 
-package java.util;
+package com.th3ee9ine.java.util;
 
 /**
  * Private implementation class for EnumSet, for "jumbo" enum types

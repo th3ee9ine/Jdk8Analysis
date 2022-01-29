@@ -22,16 +22,16 @@
  *
  *
  */
-package java.util.stream;
+package com.th3ee9ine.java.util.stream;
 
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Objects;
-import java.util.Set;
-import java.util.Spliterator;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.function.IntFunction;
+import com.th3ee9ine.java.util.HashSet;
+import com.th3ee9ine.java.util.LinkedHashSet;
+import com.th3ee9ine.java.util.Objects;
+import com.th3ee9ine.java.util.Set;
+import com.th3ee9ine.java.util.Spliterator;
+import com.th3ee9ine.java.util.concurrent.ConcurrentHashMap;
+import com.th3ee9ine.java.util.concurrent.atomic.AtomicBoolean;
+import com.th3ee9ine.java.util.function.IntFunction;
 
 /**
  * Factory methods for transforming streams into duplicate-free streams, using

@@ -22,11 +22,11 @@
  *
  *
  */
-package java.util.stream;
+package com.th3ee9ine.java.util.stream;
 
-import java.util.Spliterator;
-import java.util.concurrent.CountedCompleter;
-import java.util.concurrent.ForkJoinPool;
+import com.th3ee9ine.java.util.Spliterator;
+import com.th3ee9ine.java.util.concurrent.CountedCompleter;
+import com.th3ee9ine.java.util.concurrent.ForkJoinPool;
 
 /**
  * Abstract base class for most fork-join tasks used to implement stream ops.

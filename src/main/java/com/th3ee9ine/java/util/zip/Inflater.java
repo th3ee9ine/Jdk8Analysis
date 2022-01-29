@@ -23,7 +23,7 @@
  *
  */
 
-package java.util.zip;
+package com.th3ee9ine.java.util.zip;
 
 /**
  * This class provides support for general purpose decompression using the

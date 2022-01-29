@@ -23,7 +23,7 @@
  *
  */
 
-package java.util.zip;
+package com.th3ee9ine.java.util.zip;
 
 import java.io.Closeable;
 import java.io.InputStream;

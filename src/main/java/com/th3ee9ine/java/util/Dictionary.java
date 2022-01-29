@@ -23,7 +23,7 @@
  *
  */
 
-package java.util;
+package com.th3ee9ine.java.util;
 
 /**
  * The <code>Dictionary</code> class is the abstract parent of any

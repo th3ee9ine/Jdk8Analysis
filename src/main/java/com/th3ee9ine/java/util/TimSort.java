@@ -24,7 +24,7 @@
  *
  */
 
-package java.util;
+package com.th3ee9ine.java.util;
 
 /**
  * A stable, adaptive, iterative mergesort that requires far fewer than

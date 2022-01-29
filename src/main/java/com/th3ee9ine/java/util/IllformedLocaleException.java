@@ -30,7 +30,7 @@
  *******************************************************************************
  */
 
-package java.util;
+package com.th3ee9ine.java.util;
 
 /**
  * Thrown by methods in {@link Locale} and {@link Locale.Builder} to

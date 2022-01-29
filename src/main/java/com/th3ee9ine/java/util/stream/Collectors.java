@@ -22,40 +22,40 @@
  *
  *
  */
-package java.util.stream;
+package com.th3ee9ine.java.util.stream;
 
-import java.util.AbstractMap;
-import java.util.AbstractSet;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.DoubleSummaryStatistics;
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.IntSummaryStatistics;
-import java.util.Iterator;
-import java.util.List;
-import java.util.LongSummaryStatistics;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
-import java.util.StringJoiner;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-import java.util.function.BiConsumer;
-import java.util.function.BiFunction;
-import java.util.function.BinaryOperator;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
-import java.util.function.ToDoubleFunction;
-import java.util.function.ToIntFunction;
-import java.util.function.ToLongFunction;
+import com.th3ee9ine.java.util.AbstractMap;
+import com.th3ee9ine.java.util.AbstractSet;
+import com.th3ee9ine.java.util.ArrayList;
+import com.th3ee9ine.java.util.Arrays;
+import com.th3ee9ine.java.util.Collection;
+import com.th3ee9ine.java.util.Collections;
+import com.th3ee9ine.java.util.Comparator;
+import com.th3ee9ine.java.util.DoubleSummaryStatistics;
+import com.th3ee9ine.java.util.EnumSet;
+import com.th3ee9ine.java.util.HashMap;
+import com.th3ee9ine.java.util.HashSet;
+import com.th3ee9ine.java.util.IntSummaryStatistics;
+import com.th3ee9ine.java.util.Iterator;
+import com.th3ee9ine.java.util.List;
+import com.th3ee9ine.java.util.LongSummaryStatistics;
+import com.th3ee9ine.java.util.Map;
+import com.th3ee9ine.java.util.Objects;
+import com.th3ee9ine.java.util.Optional;
+import com.th3ee9ine.java.util.Set;
+import com.th3ee9ine.java.util.StringJoiner;
+import com.th3ee9ine.java.util.concurrent.ConcurrentHashMap;
+import com.th3ee9ine.java.util.concurrent.ConcurrentMap;
+import com.th3ee9ine.java.util.function.BiConsumer;
+import com.th3ee9ine.java.util.function.BiFunction;
+import com.th3ee9ine.java.util.function.BinaryOperator;
+import com.th3ee9ine.java.util.function.Consumer;
+import com.th3ee9ine.java.util.function.Function;
+import com.th3ee9ine.java.util.function.Predicate;
+import com.th3ee9ine.java.util.function.Supplier;
+import com.th3ee9ine.java.util.function.ToDoubleFunction;
+import com.th3ee9ine.java.util.function.ToIntFunction;
+import com.th3ee9ine.java.util.function.ToLongFunction;
 
 /**
  * Implementations of {@link Collector} that implement various useful reduction

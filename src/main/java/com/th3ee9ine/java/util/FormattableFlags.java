@@ -23,7 +23,7 @@
  *
  */
 
-package java.util;
+package com.th3ee9ine.java.util;
 
 /**
  * FomattableFlags are passed to the {@link Formattable#formatTo

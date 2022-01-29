@@ -22,7 +22,7 @@
  *
  *
  */
-package java.util;
+package com.th3ee9ine.java.util;
 
 import java.util.function.DoubleConsumer;
 import java.util.stream.Collector;

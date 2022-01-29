@@ -23,7 +23,10 @@
  *
  */
 
-package java.util;
+package com.th3ee9ine.java.util;
+
+import com.th3ee9ine.java.io.IOException;
+import com.th3ee9ine.java.io.ObjectInputStream;
 
 /**
  * A {@link NavigableSet} implementation based on a {@link TreeMap}.
@@ -514,8 +517,8 @@ public class TreeSet<E> extends AbstractSet<E>
      * Reconstitute the {@code TreeSet} instance from a stream (that is,
      * deserialize it).
      */
-    private void readObject(java.io.ObjectInputStream s)
-        throws java.io.IOException, ClassNotFoundException {
+    private void readObject(ObjectInputStream s)
+        throws IOException, ClassNotFoundException {
         // Read in any hidden stuff
         s.defaultReadObject();
 

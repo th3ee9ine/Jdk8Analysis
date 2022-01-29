@@ -22,7 +22,7 @@
  *
  *
  */
-package java.util;
+package com.th3ee9ine.java.util;
 
 /**
  * A class can implement the <code>Observer</code> interface when it

@@ -23,9 +23,9 @@
  *
  */
 
-package java.util.zip;
+package com.th3ee9ine.java.util.zip;
 
-import java.io.IOException;
+import com.th3ee9ine.java.io.IOException;
 
 /**
  * Signals that a Zip exception of some sort has occurred.

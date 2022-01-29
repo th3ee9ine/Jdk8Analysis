@@ -38,7 +38,7 @@
  *
  */
 
-package java.util;
+package com.th3ee9ine.java.util;
 
 /**
  * Signals that a resource is missing.

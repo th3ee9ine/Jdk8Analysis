@@ -23,7 +23,7 @@
  *
  */
 
-package java.util.zip;
+package com.th3ee9ine.java.util.zip;
 
 /*
  * This interface defines the constants that are used by the classes

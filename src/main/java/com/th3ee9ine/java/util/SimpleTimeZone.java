@@ -36,7 +36,7 @@
  *
  */
 
-package java.util;
+package com.th3ee9ine.java.util;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;

@@ -23,9 +23,9 @@
  *
  */
 
-package java.util;
+package com.th3ee9ine.java.util;
 
-import java.security.*;
+import com.th3ee9ine.java.security.*;
 
 /**
  * A class that represents an immutable universally unique identifier (UUID).

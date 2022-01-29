@@ -23,16 +23,16 @@
  *
  */
 
-package java.util;
-import java.io.*;
-import java.util.concurrent.atomic.AtomicLong;
-import java.util.function.DoubleConsumer;
-import java.util.function.IntConsumer;
-import java.util.function.LongConsumer;
-import java.util.stream.DoubleStream;
-import java.util.stream.IntStream;
-import java.util.stream.LongStream;
-import java.util.stream.StreamSupport;
+package com.th3ee9ine.java.util;
+import com.th3ee9ine.java.io.*;
+import com.th3ee9ine.java.util.concurrent.atomic.AtomicLong;
+import com.th3ee9ine.java.util.function.DoubleConsumer;
+import com.th3ee9ine.java.util.function.IntConsumer;
+import com.th3ee9ine.java.util.function.LongConsumer;
+import com.th3ee9ine.java.util.stream.DoubleStream;
+import com.th3ee9ine.java.util.stream.IntStream;
+import com.th3ee9ine.java.util.stream.LongStream;
+import com.th3ee9ine.java.util.stream.StreamSupport;
 
 import sun.misc.Unsafe;
 

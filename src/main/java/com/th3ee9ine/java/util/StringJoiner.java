@@ -22,7 +22,7 @@
  *
  *
  */
-package java.util;
+package com.th3ee9ine.java.util;
 
 /**
  * {@code StringJoiner} is used to construct a sequence of characters separated

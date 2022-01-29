@@ -23,16 +23,16 @@
  *
  */
 
-package java.util.zip;
+package com.th3ee9ine.java.util.zip;
 
-import java.io.OutputStream;
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.util.Vector;
-import java.util.HashSet;
-import static java.util.zip.ZipConstants64.*;
-import static java.util.zip.ZipUtils.*;
+import com.th3ee9ine.java.io.OutputStream;
+import com.th3ee9ine.java.io.IOException;
+import com.th3ee9ine.java.nio.charset.Charset;
+import com.th3ee9ine.java.nio.charset.StandardCharsets;
+import com.th3ee9ine.java.util.Vector;
+import com.th3ee9ine.java.util.HashSet;
+import static com.th3ee9ine.java.util.zip.ZipConstants64.*;
+import static com.th3ee9ine.java.util.zip.ZipUtils.*;
 
 /**
  * This class implements an output stream filter for writing files in the

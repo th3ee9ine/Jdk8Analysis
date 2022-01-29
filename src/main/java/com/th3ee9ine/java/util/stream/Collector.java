@@ -22,16 +22,16 @@
  *
  *
  */
-package java.util.stream;
+package com.th3ee9ine.java.util.stream;
 
-import java.util.Collections;
-import java.util.EnumSet;
-import java.util.Objects;
-import java.util.Set;
-import java.util.function.BiConsumer;
-import java.util.function.BinaryOperator;
-import java.util.function.Function;
-import java.util.function.Supplier;
+import com.th3ee9ine.java.util.Collections;
+import com.th3ee9ine.java.util.EnumSet;
+import com.th3ee9ine.java.util.Objects;
+import com.th3ee9ine.java.util.Set;
+import com.th3ee9ine.java.util.function.BiConsumer;
+import com.th3ee9ine.java.util.function.BinaryOperator;
+import com.th3ee9ine.java.util.function.Function;
+import com.th3ee9ine.java.util.function.Supplier;
 
 /**
  * A <a href="package-summary.html#Reduction">mutable reduction operation</a> that

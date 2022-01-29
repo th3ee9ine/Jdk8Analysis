@@ -23,7 +23,7 @@
  *
  */
 
-package java.util;
+package com.th3ee9ine.java.util;
 
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.IntConsumer;

@@ -25,12 +25,12 @@
 
 package com.th3ee9ine.java.util;
 
-import java.io.Serializable;
-import java.util.function.Function;
-import java.util.function.ToIntFunction;
-import java.util.function.ToLongFunction;
-import java.util.function.ToDoubleFunction;
-import java.util.Comparators;
+import com.th3ee9ine.java.io.Serializable;
+import com.th3ee9ine.java.util.function.Function;
+import com.th3ee9ine.java.util.function.ToIntFunction;
+import com.th3ee9ine.java.util.function.ToLongFunction;
+import com.th3ee9ine.java.util.function.ToDoubleFunction;
+import com.th3ee9ine.java.util.Comparators;
 
 /**
  * A comparison function, which imposes a <i>total ordering</i> on some

@@ -22,17 +22,17 @@
  *
  *
  */
-package java.util.stream;
+package com.th3ee9ine.java.util.stream;
 
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Spliterator;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.IntConsumer;
-import java.util.function.Predicate;
+import com.th3ee9ine.java.nio.charset.Charset;
+import com.th3ee9ine.java.nio.file.Files;
+import com.th3ee9ine.java.nio.file.Path;
+import com.th3ee9ine.java.util.Collection;
+import com.th3ee9ine.java.util.Iterator;
+import com.th3ee9ine.java.util.Spliterator;
+import com.th3ee9ine.java.util.concurrent.ConcurrentHashMap;
+import com.th3ee9ine.java.util.function.IntConsumer;
+import com.th3ee9ine.java.util.function.Predicate;
 
 /**
  * Base interface for streams, which are sequences of elements supporting

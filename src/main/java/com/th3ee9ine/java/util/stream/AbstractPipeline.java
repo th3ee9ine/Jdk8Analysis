@@ -22,12 +22,12 @@
  *
  *
  */
-package java.util.stream;
+package com.th3ee9ine.java.util.stream;
 
-import java.util.Objects;
-import java.util.Spliterator;
-import java.util.function.IntFunction;
-import java.util.function.Supplier;
+import com.th3ee9ine.java.util.Objects;
+import com.th3ee9ine.java.util.Spliterator;
+import com.th3ee9ine.java.util.function.IntFunction;
+import com.th3ee9ine.java.util.function.Supplier;
 
 /**
  * Abstract base class for "pipeline" classes, which are the core
