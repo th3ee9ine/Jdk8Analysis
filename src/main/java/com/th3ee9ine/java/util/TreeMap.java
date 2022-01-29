@@ -34,154 +34,69 @@ import java.util.function.BiFunction;
 import java.util.function.Consumer;
 
 /**
- * A Red-Black tree based {@link NavigableMap} implementation.
- * The map is sorted according to the {@linkplain Comparable natural
- * ordering} of its keys, or by a {@link Comparator} provided at map
- * creation time, depending on which constructor is used.
+ * TreeMap，带解析。
  *
- * <p>This implementation provides guaranteed log(n) time cost for the
- * {@code containsKey}, {@code get}, {@code put} and {@code remove}
- * operations.  Algorithms are adaptations of those in Cormen, Leiserson, and
- * Rivest's <em>Introduction to Algorithms</em>.
- *
- * <p>Note that the ordering maintained by a tree map, like any sorted map, and
- * whether or not an explicit comparator is provided, must be <em>consistent
- * with {@code equals}</em> if this sorted map is to correctly implement the
- * {@code Map} interface.  (See {@code Comparable} or {@code Comparator} for a
- * precise definition of <em>consistent with equals</em>.)  This is so because
- * the {@code Map} interface is defined in terms of the {@code equals}
- * operation, but a sorted map performs all key comparisons using its {@code
- * compareTo} (or {@code compare}) method, so two keys that are deemed equal by
- * this method are, from the standpoint of the sorted map, equal.  The behavior
- * of a sorted map <em>is</em> well-defined even if its ordering is
- * inconsistent with {@code equals}; it just fails to obey the general contract
- * of the {@code Map} interface.
- *
- * <p><strong>Note that this implementation is not synchronized.</strong>
- * If multiple threads access a map concurrently, and at least one of the
- * threads modifies the map structurally, it <em>must</em> be synchronized
- * externally.  (A structural modification is any operation that adds or
- * deletes one or more mappings; merely changing the value associated
- * with an existing key is not a structural modification.)  This is
- * typically accomplished by synchronizing on some object that naturally
- * encapsulates the map.
- * If no such object exists, the map should be "wrapped" using the
- * {@link Collections#synchronizedSortedMap Collections.synchronizedSortedMap}
- * method.  This is best done at creation time, to prevent accidental
- * unsynchronized access to the map: <pre>
- *   SortedMap m = Collections.synchronizedSortedMap(new TreeMap(...));</pre>
- *
- * <p>The iterators returned by the {@code iterator} method of the collections
- * returned by all of this class's "collection view methods" are
- * <em>fail-fast</em>: if the map is structurally modified at any time after
- * the iterator is created, in any way except through the iterator's own
- * {@code remove} method, the iterator will throw a {@link
- * ConcurrentModificationException}.  Thus, in the face of concurrent
- * modification, the iterator fails quickly and cleanly, rather than risking
- * arbitrary, non-deterministic behavior at an undetermined time in the future.
- *
- * <p>Note that the fail-fast behavior of an iterator cannot be guaranteed
- * as it is, generally speaking, impossible to make any hard guarantees in the
- * presence of unsynchronized concurrent modification.  Fail-fast iterators
- * throw {@code ConcurrentModificationException} on a best-effort basis.
- * Therefore, it would be wrong to write a program that depended on this
- * exception for its correctness:   <em>the fail-fast behavior of iterators
- * should be used only to detect bugs.</em>
- *
- * <p>All {@code Map.Entry} pairs returned by methods in this class
- * and its views represent snapshots of mappings at the time they were
- * produced. They do <strong>not</strong> support the {@code Entry.setValue}
- * method. (Note however that it is possible to change mappings in the
- * associated map using {@code put}.)
- *
- * <p>This class is a member of the
- * <a href="{@docRoot}/../technotes/guides/collections/index.html">
- * Java Collections Framework</a>.
- *
- * @param <K> the type of keys maintained by this map
- * @param <V> the type of mapped values
- *
- * @author  Josh Bloch and Doug Lea
- * @see Map
- * @see HashMap
- * @see Hashtable
- * @see Comparable
- * @see Comparator
- * @see Collection
- * @since 1.2
+ * @author th3ee9ine.
+ * @date 2022/1/29 13:34.
  */
+public class TreeMap<K,V> extends AbstractMap<K,V>
+        implements NavigableMap<K,V>, Cloneable, Serializable {
+    public static void main(String[] args) {
+        TreeMap<Integer, Integer> treeMap = new TreeMap();
+        treeMap.put(1, 2);
+        treeMap.put(2, 3);
+        treeMap.put(4, 5);
+        treeMap.put(5, 6);
+        treeMap.put(6, 7);
+        treeMap.put(7, 8);
+        treeMap.put(8, 9);
+        treeMap.put(9, 10);
+        System.out.println(treeMap.containsValue(0));
+    }
 
-public class TreeMap<K,V>
-    extends AbstractMap<K,V>
-    implements NavigableMap<K,V>, Cloneable, Serializable
-{
     /**
-     * The comparator used to maintain order in this tree map, or
-     * null if it uses the natural ordering of its keys.
-     *
-     * @serial
+     * 比较器，如果没有自定义比较器，则为 null。
+     * 默认按照 key 的自然顺序进行排序。
      */
     private final Comparator<? super K> comparator;
-
-    private transient Entry<K,V> root;
-
     /**
-     * The number of entries in the tree
+     * 树的根节点。
+     * 不可被序列化（transient 关键字，这里不展开描述）。
+     */
+    private transient Entry<K,V> root;
+    /**
+     * 节点数。
+     * 不可被序列化。
      */
     private transient int size = 0;
-
     /**
-     * The number of structural modifications to the tree.
+     * 对树结构修改（添加、删除）的次数。
+     * 不可被序列化。
      */
     private transient int modCount = 0;
 
     /**
-     * Constructs a new, empty tree map, using the natural ordering of its
-     * keys.  All keys inserted into the map must implement the {@link
-     * Comparable} interface.  Furthermore, all such keys must be
-     * <em>mutually comparable</em>: {@code k1.compareTo(k2)} must not throw
-     * a {@code ClassCastException} for any keys {@code k1} and
-     * {@code k2} in the map.  If the user attempts to put a key into the
-     * map that violates this constraint (for example, the user attempts to
-     * put a string key into a map whose keys are integers), the
-     * {@code put(Object key, Object value)} call will throw a
-     * {@code ClassCastException}.
+     * 创建一个新的 TreeMap，默认比较器。
+     * 插入的所有 key 都必须实现 Comparable 接口。
      */
     public TreeMap() {
         comparator = null;
     }
 
     /**
-     * Constructs a new, empty tree map, ordered according to the given
-     * comparator.  All keys inserted into the map must be <em>mutually
-     * comparable</em> by the given comparator: {@code comparator.compare(k1,
-     * k2)} must not throw a {@code ClassCastException} for any keys
-     * {@code k1} and {@code k2} in the map.  If the user attempts to put
-     * a key into the map that violates this constraint, the {@code put(Object
-     * key, Object value)} call will throw a
-     * {@code ClassCastException}.
-     *
-     * @param comparator the comparator that will be used to order this map.
-     *        If {@code null}, the {@linkplain Comparable natural
-     *        ordering} of the keys will be used.
+     * 创建一个新的 TreeMap，使用自定义比较器。
      */
     public TreeMap(Comparator<? super K> comparator) {
         this.comparator = comparator;
     }
 
     /**
-     * Constructs a new tree map containing the same mappings as the given
-     * map, ordered according to the <em>natural ordering</em> of its keys.
-     * All keys inserted into the new map must implement the {@link
-     * Comparable} interface.  Furthermore, all such keys must be
-     * <em>mutually comparable</em>: {@code k1.compareTo(k2)} must not throw
-     * a {@code ClassCastException} for any keys {@code k1} and
-     * {@code k2} in the map.  This method runs in n*log(n) time.
+     * 根据指定的 Map 构造一个 TreeMap，并且按照 key 的自然顺序进行排序。
+     * 此方法的时间复杂度为：n*log(n)。
      *
-     * @param  m the map whose mappings are to be placed in this map
-     * @throws ClassCastException if the keys in m are not {@link Comparable},
-     *         or are not mutually comparable
-     * @throws NullPointerException if the specified map is null
+     * @param m 给定的 Map。
+     * @throws ClassCastException 如果指定的 Map 中的 key 不可比较，或者不可相互比较。
+     * @throws ClassCastException 如果指定的 Map 为空。
      */
     public TreeMap(Map<? extends K, ? extends V> m) {
         comparator = null;
@@ -189,30 +104,25 @@ public class TreeMap<K,V>
     }
 
     /**
-     * Constructs a new tree map containing the same mappings and
-     * using the same ordering as the specified sorted map.  This
-     * method runs in linear time.
+     * 根据指定的 SortedMap 构造一个 TreeMap，并使用相同的顺序。
+     * 此方法的时间复杂度为：n。
      *
-     * @param  m the sorted map whose mappings are to be placed in this map,
-     *         and whose comparator is to be used to sort this map
-     * @throws NullPointerException if the specified map is null
+     * @param  m 已排序的映射，其映射将放置在此映射中，并且其比较器将用于对此映射进行排序
+     * @throws NullPointerException 如果指定的 SortedMap 为空。
      */
     public TreeMap(SortedMap<K, ? extends V> m) {
         comparator = m.comparator();
         try {
             buildFromSorted(m.size(), m.entrySet().iterator(), null, null);
-        } catch (java.io.IOException cannotHappen) {
+        } catch (IOException cannotHappen) {
         } catch (ClassNotFoundException cannotHappen) {
         }
     }
 
-
-    // Query Operations
-
     /**
-     * Returns the number of key-value mappings in this map.
+     * 返回节点数.
      *
-     * @return the number of key-value mappings in this map
+     * @return 节点数.
      */
     @Override
     public int size() {
@@ -220,17 +130,12 @@ public class TreeMap<K,V>
     }
 
     /**
-     * Returns {@code true} if this map contains a mapping for the specified
-     * key.
+     * 判断 TreeMap 中是否包含指定的 key，如果包含则返回 true。
      *
-     * @param key key whose presence in this map is to be tested
-     * @return {@code true} if this map contains a mapping for the
-     *         specified key
-     * @throws ClassCastException if the specified key cannot be compared
-     *         with the keys currently in the map
-     * @throws NullPointerException if the specified key is null
-     *         and this map uses natural ordering, or its comparator
-     *         does not permit null keys
+     * @param key 指定的 key。
+     * @return 如果包含指定的 key，则返回 true。
+     * @throws ClassCastException 如果指定的 key 无法与 TreeMap 中的 key 进行比较。
+     * @throws NullPointerException 如果指定的 key 为 null 并且 TreeMap 使用默认比较器，或者比较器不允许 key 为 null。
      */
     @Override
     public boolean containsKey(Object key) {
@@ -238,21 +143,20 @@ public class TreeMap<K,V>
     }
 
     /**
-     * Returns {@code true} if this map maps one or more keys to the
-     * specified value.  More formally, returns {@code true} if and only if
-     * this map contains at least one mapping to a value {@code v} such
-     * that {@code (value==null ? v==null : value.equals(v))}.  This
-     * operation will probably require time linear in the map size for
-     * most implementations.
+     * 判断 TreeMap 中是否包含指定的 value，如果包含则返回 true。
+     * 更准确的说：当且仅当此 TreeMap 包含至少一个 value 所对应的键值对时，返回 true。
+     * 时间复杂度：与节点数成线性关系。
      *
-     * @param value value whose presence in this map is to be tested
-     * @return {@code true} if a mapping to {@code value} exists;
-     *         {@code false} otherwise
-     * @since 1.2
+     * @param value 指定的 value。
+     * @return 如果存在指定的value，则返回 true。
      */
     @Override
     public boolean containsValue(Object value) {
+        // 从小到大遍历整棵树，找到对应值后，立即返回
+        // Entry<K,V> e = getFirstEntry() 返回最小的key所对应的节点。
+        // e = successor(e) 将下一个节点赋值给 e。
         for (Entry<K,V> e = getFirstEntry(); e != null; e = successor(e)) {
+            // 如果值相等，则说明 value 在当前 TreeMap 中存在，返回 true
             if (valEquals(value, e.value)) {
                 return true;
             }
@@ -1410,8 +1314,12 @@ public class TreeMap<K,V>
     }
 
     /**
-     * Test two values for equality.  Differs from o1.equals(o2) only in
-     * that it copes with {@code null} o1 properly.
+     * 判断两个值是否相等。
+     * 与 equals 的不同之处在于，valEquals 可以处理 o1 为 null 的情况。
+     *
+     * @param o1 o1.
+     * @param o2 o2.
+     * @return o1 等于 o2 返回 true。
      */
     static final boolean valEquals(Object o1, Object o2) {
         return (o1==null ? o2==null : o1.equals(o2));
@@ -2362,12 +2270,18 @@ public class TreeMap<K,V>
     }
 
     /**
-     * Returns the first Entry in the TreeMap (according to the TreeMap's
-     * key-sort function).  Returns null if the TreeMap is empty.
+     * 返回 TreeMap 中的第一个节点。
+     * 如果 TreeMap 为空，则返回 null。
+     *
+     * 注意：这里的第一个节点，并非是根节点，而是按照比较器，排序后，最小的那个值。
+     * 即：TreeMap 最左（小）的那个节点。
      */
     final Entry<K,V> getFirstEntry() {
+        // 1、获取根节点
         Entry<K,V> p = root;
+        // 2、判断根节点是否为空
         if (p != null) {
+            // 2.2、如果根节点不为空，则遍历左子树，找出最左（小）的那个节点
             while (p.left != null) {
                 p = p.left;
             }
@@ -2390,20 +2304,42 @@ public class TreeMap<K,V>
     }
 
     /**
-     * Returns the successor of the specified Entry, or null if no such.
+     * 找出指定节点的下一个节点。
+     *
+     * @param t 指定节点。
+     * @param <K> 指定节点的 key 的类型。
+     * @param <V> 指定节点的 value 的类型。
+     * @return 指定节点的下一个节点。
      */
     static <K,V> Entry<K,V> successor(Entry<K,V> t) {
+        // 1、判断 t 节点是否为 null
         if (t == null) {
             return null;
         } else if (t.right != null) {
+            // 2、如果右节点不为空，则将右节点赋值给 p
             Entry<K,V> p = t.right;
+            // 2.1、遍历 p 节点的左子树，获取 p 节点最左（即最小）的节点
             while (p.left != null) {
                 p = p.left;
             }
             return p;
         } else {
+            // 3、如果 t 节点的右子树为空，则将 t 节点的父节点，赋值给 p
             Entry<K,V> p = t.parent;
+            // 4、将 t 节点赋值给 ch
             Entry<K,V> ch = t;
+            // 5、遍历，找出比当前节点大一个单位的节点
+            // 详细说明：
+            //      当 t 节点的右子树为空的情况下，说明 t 节点是当前子树最大的节点，则 t 节点的下个节点，可能存在3种情况：
+            //          1、t 节点父节点为空，这种情况：下一个节点为 null。
+            //          2、t 节点为父节点的左节点，这种情况：下一个节点为父节点。
+            //          3、t 节点为父节点的右节点，这种情况：则需要判断父节点的父节点，也就是爷爷节点，
+            //              这种情况需要重新走一遍判断逻辑，直到符合1、2两种情况。
+            //              极端情况：t节点为最后一个节点，即这个节点在右子树的最右边(最大的那个节点)，这种情况会遍历右子树，最后返回 null。
+            //
+            // 所以 p != null && ch == p.right 我们可以这样理解：
+            //      1、p != null：如果父节点不为空，则说明要判断2、3两种情况，反之直接返回 null (p 的值为 null)
+            //      2、ch == p.right：如果 t 节点为父节点的右节点，则需要判断爷爷节点，反之直接返回 p 节点 (p 的值为父节点)
             while (p != null && ch == p.right) {
                 ch = p;
                 p = p.parent;
