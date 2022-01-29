@@ -165,16 +165,10 @@ public class TreeMap<K,V> extends AbstractMap<K,V>
     }
 
     /**
-     * 根据指定的 key 返回 value。
-     * 更准确的说：
-     *      如果此 TreeMap 包含 key 所对应的 Entry(最多只会有一个这样的映射)，
-     *      且可以根据比较器(comparator)判断，key 与 Entry.key 相等，
-     *      则返回 Entry.value，否则返回 null。
-     * 所以说，返回 null 的情况可以区分为两种：
-     *      第一种：key 所对应的 Entry 不存在。
-     *      第二种：key 所对应的 Entry 存在，但是根据比较器(comparator)判断，key 与 Entry.key 不相等。
-     * TreeMap.containsKey() 方法可以判断 TreeMap 中是否包含 key 所对应的 Entry，可以使用该方法区分上面两种情况。
+     * 根据指定的 key 返回对应的值。
      *
+     * @param key 指定的 key。
+     * @return 返回 key 所对应的值。
      * @throws ClassCastException 如果指定的 key 无法与 TreeMap 中的 key 进行比较。
      * @throws NullPointerException 如果指定的 key 为 null 并且 TreeMap 使用默认比较器，或者比较器不允许 key 为 null。
      */
@@ -186,13 +180,22 @@ public class TreeMap<K,V> extends AbstractMap<K,V>
         return (p==null ? null : p.value);
     }
 
+    /**
+     * 返回比较器，如果没有自定义比较器，则返回 null。
+     *
+     * @return 比较器。
+     */
     @Override
     public Comparator<? super K> comparator() {
         return comparator;
     }
 
     /**
-     * @throws NoSuchElementException {@inheritDoc}
+     * 返回第一个节点的 key。
+     *
+     * 注意：这里的第一个节点，非根节点，而是最左边的那个节点(最小的节点)。
+     *
+     * @return 第一个节点。
      */
     @Override
     public K firstKey() {
@@ -200,7 +203,11 @@ public class TreeMap<K,V> extends AbstractMap<K,V>
     }
 
     /**
-     * @throws NoSuchElementException {@inheritDoc}
+     * 返回最后一个节点的 key。
+     *
+     * 注意：这里的最后一个节点，非根节点，而是最右边的那个节点(最大的节点)。
+     *
+     * @return 最后一个节点。
      */
     @Override
     public K lastKey() {
@@ -239,35 +246,54 @@ public class TreeMap<K,V> extends AbstractMap<K,V>
     }
 
     /**
-     * Returns this map's entry for the given key, or {@code null} if the map
-     * does not contain an entry for the key.
+     * 根据指定的 key 查找对应的 Entry。
      *
-     * @return this map's entry for the given key, or {@code null} if the map
-     *         does not contain an entry for the key
-     * @throws ClassCastException if the specified key cannot be compared
-     *         with the keys currently in the map
-     * @throws NullPointerException if the specified key is null
-     *         and this map uses natural ordering, or its comparator
-     *         does not permit null keys
+     * 更准确的说：
+     *      如果此 TreeMap 包含 key 所对应的 Entry(最多只会有一个这样的映射)，
+     *      且可以根据比较器(comparator)判断，key 与 Entry.key 相等，
+     *      则返回 Entry，否则返回 null。
+     * 所以说，返回 null 的情况可以区分为两种：
+     *      第一种：key 所对应的 Entry 不存在。
+     *      第二种：key 所对应的 Entry 存在，但是根据比较器(comparator)判断，key 与 Entry.key 不相等。
+     * TreeMap.containsKey() 方法可以判断 TreeMap 中是否包含 key 所对应的 Entry，可以使用该方法区分上面两种情况。
+     *
+     * @param key 指定的 key。
+     * @return 根据指定的 key 查找对应的 Entry。
+     * @throws ClassCastException 如果指定的 key 无法与 TreeMap 中的 key 进行比较。
+     * @throws NullPointerException 如果指定的 key 为 null 并且 TreeMap 使用默认比较器，或者比较器不允许 key 为 null。
      */
     final Entry<K,V> getEntry(Object key) {
-        // Offload comparator-based version for sake of performance
+        // 1、如果比较器不为空，则执行 TreeMap.getEntryUsingComparator() 方法。
         if (comparator != null) {
             return getEntryUsingComparator(key);
         }
+        // 2、如果 key 为空 null，则抛出 NullPointerException 异常。
+        // 注意：如果自定义比较器(comparator)的情况，记得在比较器中添加 key 判空的逻辑，
+        //      因为 TreeMap.getEntryUsingComparator() 方法不会对 key 进行校验。
         if (key == null) {
             throw new NullPointerException();
         }
-        @SuppressWarnings("unchecked")
-            Comparable<? super K> k = (Comparable<? super K>) key;
+        // 3、将 key 所对应的比较器赋值给 k
+        @SuppressWarnings("unchecked") // 忽略 unchecked 告警
+        Comparable<? super K> k = (Comparable<? super K>) key;
+        // 4、将根节点赋值给 p
         Entry<K,V> p = root;
+        // 5、遍历 p，查找 k.compareTo(p.key) 等于 0 的值
         while (p != null) {
+            // k.compareTo(p.key) 的值说明：
+            //      0 : 说明 k 等于 p.key
+            //      大于0 : 说明 k 大于 p.key
+            //      小于0 : 说明 k 小于 p.key
+            // 5.1、将 k.compareTo(p.key) 的值赋值给 cmp
             int cmp = k.compareTo(p.key);
+            // 5.2、如果 cmp 小于 0 则继续遍历左子树
             if (cmp < 0) {
                 p = p.left;
             } else if (cmp > 0) {
+                // 5.3、如果 cmp 大于 0 则继续遍历右子树
                 p = p.right;
             } else {
+                // 5.3、如果 cmp 等于 0 则返回 p
                 return p;
             }
         }
@@ -275,17 +301,22 @@ public class TreeMap<K,V> extends AbstractMap<K,V>
     }
 
     /**
-     * Version of getEntry using comparator. Split off from getEntry
-     * for performance. (This is not worth doing for most methods,
-     * that are less dependent on comparator performance, but is
-     * worthwhile here.)
+     * 使用自定义比较器，根据指定的 key 查找对应的 Entry。
+     *
+     * @param key 指定的 key。
+     * @return 根据指定的 key 查找对应的 Entry。
      */
     final Entry<K,V> getEntryUsingComparator(Object key) {
-        @SuppressWarnings("unchecked")
-            K k = (K) key;
+        // 1、将 key 转换成 K 类型的对象，并赋值给 k。
+        @SuppressWarnings("unchecked") // 忽略 unchecked 告警
+        K k = (K) key;
+        // 2、将 comparator 赋值给 cpr。
         Comparator<? super K> cpr = comparator;
+        // 3、如果 cpr 不为空，遍历 TreeMap
         if (cpr != null) {
+            // 4、将根节点赋值给 p
             Entry<K,V> p = root;
+            // 5、遍历 p 的所有节点，找出 key 对应的 Entry。
             while (p != null) {
                 int cmp = cpr.compare(k, p.key);
                 if (cmp < 0) {
@@ -1335,8 +1366,13 @@ public class TreeMap<K,V> extends AbstractMap<K,V>
     }
 
     /**
-     * Returns the key corresponding to the specified Entry.
-     * @throws NoSuchElementException if the Entry is null
+     * 返回指定 Entry 的 key。
+     *
+     * @param e 指定的 Entry。
+     * @param <K> Entry.key 对应的类型。
+     * @return 指定 Entry 的 key。
+     *
+     * @throws NoSuchElementException 如果 Entry 为空。
      */
     static <K> K key(Entry<K,?> e) {
         if (e==null) {
@@ -2322,7 +2358,7 @@ public class TreeMap<K,V> extends AbstractMap<K,V>
             Entry<K,V> p = t.parent;
             // 4、将 t 节点赋值给 ch
             Entry<K,V> ch = t;
-            // 5、遍历，找出比当前节点大一个单位的节点
+            // 5、遍历，找出下一个节点
             // 详细说明：
             //      当 t 节点的右子树为空的情况下，说明 t 节点是当前子树最大的节点，则 t 节点的下个节点，可能存在3种情况：
             //          1、t 节点父节点为空，这种情况：下一个节点为 null。
