@@ -202,16 +202,12 @@ public class TreeMap<K,V> extends AbstractMap<K,V>
     }
 
     /**
-     * Copies all of the mappings from the specified map to this map.
-     * These mappings replace any mappings that this map had for any
-     * of the keys currently in the specified map.
+     * 将指定 map 中的所有键值对复制到当前 map。
+     * 这些键值对会替换当前 map 中的相同 key 的键值对。
      *
-     * @param  map mappings to be stored in this map
-     * @throws ClassCastException if the class of a key or value in
-     *         the specified map prevents it from being stored in this map
-     * @throws NullPointerException if the specified map is null or
-     *         the specified map contains a null key and this map does not
-     *         permit null keys
+     * @param  map 指定的 map。
+     * @throws ClassCastException – 如果指定的 map 中的 key 或 value 不被允许存储在当前 map 中。
+     * @throws NullPointerException – 如果指定的 map 为空或指定的 map 包含一个空键并且当前 map 不允许空键。
      */
     @Override
     public void putAll(Map<? extends K, ? extends V> map) {
@@ -273,7 +269,7 @@ public class TreeMap<K,V> extends AbstractMap<K,V>
         // 5、遍历 p，查找 k.compareTo(p.key) 等于 0 的值
         while (p != null) {
             // k.compareTo(p.key) 的值说明：
-            //      0 : 说明 k 等于 p.key
+            //      等于0 : 说明 k 等于 p.key
             //      大于0 : 说明 k 大于 p.key
             //      小于0 : 说明 k 小于 p.key
             // 5.1、将 k.compareTo(p.key) 的值赋值给 cmp
@@ -310,12 +306,16 @@ public class TreeMap<K,V> extends AbstractMap<K,V>
             Entry<K,V> p = root;
             // 5、遍历 p 的所有节点，找出 key 对应的 Entry。
             while (p != null) {
+                // 5.1、使用比较器，比较两个 key
                 int cmp = cpr.compare(k, p.key);
+                // 5.2、如果结果小于0，则继续比较左节点
                 if (cmp < 0) {
                     p = p.left;
                 } else if (cmp > 0) {
+                    // 5.3、如果结果大于0，则继续比较右节点
                     p = p.right;
                 } else {
+                    // 5.3、如果结果等于0，则直接返回结果
                     return p;
                 }
             }
@@ -324,25 +324,33 @@ public class TreeMap<K,V> extends AbstractMap<K,V>
     }
 
     /**
-     * Gets the entry corresponding to the specified key; if no such entry
-     * exists, returns the entry for the least key greater than the specified
-     * key; if no such entry exists (i.e., the greatest key in the Tree is less
-     * than the specified key), returns {@code null}.
+     * 获取指定 key 对应的 entry；
+     * 如果没有这样的 entry 存在，则返回大于指定 key 的最小键的 entry；
+     * 如果不存在这样的 entry（即，树中最大的 key 比指定的 key 小），则返回 null。
      */
     final Entry<K,V> getCeilingEntry(K key) {
+        // 1、将根节点赋值给 p
         Entry<K,V> p = root;
+        // 2、遍历查找是否有符合条件的 entry
         while (p != null) {
+            // 2.1、使用比较器，比较两个 key
             int cmp = compare(key, p.key);
+            // 2.2、如果结果小于0，则继续比较左节点
             if (cmp < 0) {
+                // 2.2.1、如果 p 的左节点不为空，则继续比较左节点
                 if (p.left != null) {
                     p = p.left;
                 } else {
+                    // 2.2.2、如果 p 的左节点为空，则返回 p
                     return p;
                 }
             } else if (cmp > 0) {
+                // 2.3、如果结果大于0，则继续比较右节点
+                // 2.3.2、如果 p 的右节点不为空，则继续比较右节点
                 if (p.right != null) {
                     p = p.right;
                 } else {
+                    // 2.3.2、如果 p 的右节点为空，则遍历 p 的父节点，找出大于指定 key 的最小键的 entry
                     Entry<K,V> parent = p.parent;
                     Entry<K,V> ch = p;
                     while (parent != null && ch == parent.right) {
@@ -352,6 +360,7 @@ public class TreeMap<K,V> extends AbstractMap<K,V>
                     return parent;
                 }
             } else {
+                // 2.4、如果结果等于0，则直接返回 p
                 return p;
             }
         }
@@ -359,24 +368,33 @@ public class TreeMap<K,V> extends AbstractMap<K,V>
     }
 
     /**
-     * Gets the entry corresponding to the specified key; if no such entry
-     * exists, returns the entry for the greatest key less than the specified
-     * key; if no such entry exists, returns {@code null}.
+     * 获取指定 key 对应的 entry；
+     * 如果没有这样的 entry 存在，则返回小于指定 key 的最大键的 entry；
+     * 如果不存在这样的 entry（即，树中最小的 key 比指定的 key 大），则返回 null。
      */
     final Entry<K,V> getFloorEntry(K key) {
+        // 1、将根节点赋值给 p
         Entry<K,V> p = root;
+        // 2、遍历查找是否有符合条件的 entry
         while (p != null) {
+            // 2.1、使用比较器，比较两个 key
             int cmp = compare(key, p.key);
+            // 2.2、如果结果大于0，则继续比较右节点
             if (cmp > 0) {
+                // 2.2.1、如果 p 的右节点不为空，则继续比较右节点
                 if (p.right != null) {
                     p = p.right;
                 } else {
+                    // 2.2.2、如果 p 的右节点为空，则返回 p
                     return p;
                 }
             } else if (cmp < 0) {
+                // 2.3、如果结果小于0，则继续比较左节点
+                // 2.3.2、如果 p 的左节点不为空，则继续比较左节点
                 if (p.left != null) {
                     p = p.left;
                 } else {
+                    // 2.3.2、如果 p 的左节点为空，则遍历 p 的父节点，找出小于指定 key 的最大键的 entry
                     Entry<K,V> parent = p.parent;
                     Entry<K,V> ch = p;
                     while (parent != null && ch == parent.left) {
@@ -386,6 +404,7 @@ public class TreeMap<K,V> extends AbstractMap<K,V>
                     return parent;
                 }
             } else {
+                // 2.4、如果结果等于0，则直接返回 p
                 return p;
             }
 
