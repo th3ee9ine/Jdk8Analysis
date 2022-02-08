@@ -325,7 +325,7 @@ public class TreeMap<K,V> extends AbstractMap<K,V>
 
     /**
      * 获取指定 key 对应的 entry；
-     * 如果没有这样的 entry 存在，则返回大于指定 key 的最小键的 entry；
+     * 如果不存在这样的 entry，则返回大于指定 key 的最小键的 entry；
      * 如果不存在这样的 entry（即，树中最大的 key 比指定的 key 小），则返回 null。
      */
     final Entry<K,V> getCeilingEntry(K key) {
@@ -369,7 +369,7 @@ public class TreeMap<K,V> extends AbstractMap<K,V>
 
     /**
      * 获取指定 key 对应的 entry；
-     * 如果没有这样的 entry 存在，则返回小于指定 key 的最大键的 entry；
+     * 如果不存在这样的 entry，则返回小于指定 key 的最大键的 entry；
      * 如果不存在这样的 entry（即，树中最小的 key 比指定的 key 大），则返回 null。
      */
     final Entry<K,V> getFloorEntry(K key) {
@@ -413,12 +413,11 @@ public class TreeMap<K,V> extends AbstractMap<K,V>
     }
 
     /**
-     * Gets the entry for the least key greater than the specified
-     * key; if no such entry exists, returns the entry for the least
-     * key greater than the specified key; if no such entry exists
-     * returns {@code null}.
+     * 获取大于指定 key 的最小 key 的 entry；
+     * 如果不存在这样的 entry，则返回 null。
      */
     final Entry<K,V> getHigherEntry(K key) {
+        // 详细逻辑，参考 getCeilingEntry
         Entry<K,V> p = root;
         while (p != null) {
             int cmp = compare(key, p.key);
@@ -446,11 +445,11 @@ public class TreeMap<K,V> extends AbstractMap<K,V>
     }
 
     /**
-     * Returns the entry for the greatest key less than the specified key; if
-     * no such entry exists (i.e., the least key in the Tree is greater than
-     * the specified key), returns {@code null}.
+     * 获取小于指定 key 的最大 key 的 entry；
+     * 如果不存在这样的 entry（即，树中最小的 key 比指定的 key 大），则返回 null。
      */
     final Entry<K,V> getLowerEntry(K key) {
+        // 详细逻辑，参考 getFloorEntry
         Entry<K,V> p = root;
         while (p != null) {
             int cmp = compare(key, p.key);
@@ -478,77 +477,99 @@ public class TreeMap<K,V> extends AbstractMap<K,V>
     }
 
     /**
-     * Associates the specified value with the specified key in this map.
-     * If the map previously contained a mapping for the key, the old
-     * value is replaced.
+     * 将指定的 value 与当前 map 中指定的 key 相关联。
+     * 如果关联之前包含 key 所对应的 value，则替换旧的 value。
      *
-     * @param key key with which the specified value is to be associated
-     * @param value value to be associated with the specified key
+     * @param key 与指定 value 关联的 key。
+     * @param value 与指定 key 关联的 value。
      *
-     * @return the previous value associated with {@code key}, or
-     *         {@code null} if there was no mapping for {@code key}.
-     *         (A {@code null} return can also indicate that the map
-     *         previously associated {@code null} with {@code key}.)
-     * @throws ClassCastException if the specified key cannot be compared
-     *         with the keys currently in the map
-     * @throws NullPointerException if the specified key is null
-     *         and this map uses natural ordering, or its comparator
-     *         does not permit null keys
+     * @return 与 key 关联的前一个值，如果没有 key 映射，则返回 null。 （返回 null 还可以指示映射先前将 null 与 key 关联。）
+     * @throws ClassCastException 如果指定的 key 无法与 TreeMap 中的 key 进行比较。
+     * @throws NullPointerException 如果指定的 key 为 null 并且 TreeMap 使用默认比较器，或者比较器不允许 key 为 null。
      */
     @Override
     public V put(K key, V value) {
+        // 1、将根节点赋值给 t
         Entry<K,V> t = root;
+        // 2、判断根节点是否为空
         if (t == null) {
+            // 2.1、类型检查、null检查
             compare(key, key); // type (and possibly null) check
-
+            // 2.2、创建根节点
             root = new Entry<>(key, value, null);
+            // 2.3、节点数变为1
             size = 1;
+            // 2.4、对树结构修改的次数加1
             modCount++;
             return null;
         }
+        // 存储比较结果
         int cmp;
+        // 存储 entry
         Entry<K,V> parent;
-        // split comparator and comparable paths
+        // 3、将自定义比较器赋值给 cpr
         Comparator<? super K> cpr = comparator;
+        // 4、如果自定义比较器不为空，则遍历寻找 key 的位置
         if (cpr != null) {
             do {
+                // 4.1、将根节点赋值给 parent
                 parent = t;
+                // 4.2、将比较结果赋值给 cmp
                 cmp = cpr.compare(key, t.key);
+                // 4.3、如果结果小于0，则继续遍历左子树
                 if (cmp < 0) {
                     t = t.left;
                 } else if (cmp > 0) {
+                    // 4.4、如果结果大于0，则继续遍历右子树
                     t = t.right;
                 } else {
+                    // 4.5、如果结果等于0，则覆盖原有的 value 并返回
                     return t.setValue(value);
                 }
             } while (t != null);
-        }
-        else {
+        } else {
+            // 5、如果自定义比较器为空
+            // 5.1、如果 key 为 null，则抛空指针异常
             if (key == null) {
                 throw new NullPointerException();
             }
-            @SuppressWarnings("unchecked")
-                Comparable<? super K> k = (Comparable<? super K>) key;
+            // 5.2、获取 key 所对应的泛型 K 的比较器
+            // 注意：
+            // 1、这里特别说明，因为jdk中几乎所有的类都是 Comparable 的实现类，所以这里是被允许的
+            // 2、如果这里的 key 没有实现 Comparable 接口，则会报错 XX cannot be cast to java.lang.Comparable
+            @SuppressWarnings("unchecked") // 告诉编译器忽略 unchecked 警告信息
+            Comparable<? super K> k = (Comparable<? super K>) key;
             do {
+                // 5.2.1、将 t 赋值给 parent
                 parent = t;
+                // 5.2.2、将比较结果赋值给 cmp
                 cmp = k.compareTo(t.key);
+                // 5.2.3、如果结果小于0，则继续遍历左子树
                 if (cmp < 0) {
                     t = t.left;
                 } else if (cmp > 0) {
+                    // 5.2.4、如果结果大于0，则继续遍历右子树
                     t = t.right;
                 } else {
+                    // 5.2.5、如果结果等于0，则覆盖原有的 value 并返回
                     return t.setValue(value);
                 }
             } while (t != null);
         }
+        // 6、当前map 不存在 key 对应的 entry，生成新的 entry
         Entry<K,V> e = new Entry<>(key, value, parent);
+        // 7、如果比较结果小于 0，则将 entry 存放在左节点
         if (cmp < 0) {
             parent.left = e;
         } else {
+            // 8、如果比较结果大于 0，则将 entry 存放在右节点
             parent.right = e;
         }
+        // 9、插入新的节点后，对树的结构进行修正
         fixAfterInsertion(e);
+        // 10、节点数加1
         size++;
+        // 11、树结构修改次数加1
         modCount++;
         return null;
     }
@@ -2190,23 +2211,17 @@ public class TreeMap<K,V> extends AbstractMap<K,V>
     }
 
     /**
-     * This class exists solely for the sake of serialization
-     * compatibility with previous releases of TreeMap that did not
-     * support NavigableMap.  It translates an old-version SubMap into
-     * a new-version AscendingSubMap. This class is never otherwise
-     * used.
-     *
-     * @serial include
+     * 此类的存在仅仅是为了与不支持 NavigableMap 的先前版本的 TreeMap 的序列化兼容性。
+     * 它将旧版本的 SubMap 转换为新版本的 AscendingSubMap。
+     * 此类从未以其他方式使用。
      */
-    private class SubMap extends AbstractMap<K,V>
-        implements SortedMap<K,V>, Serializable {
+    private class SubMap extends AbstractMap<K,V> implements SortedMap<K,V>, Serializable {
         private static final long serialVersionUID = -6520786458950516097L;
         private boolean fromStart = false, toEnd = false;
         private K fromKey, toKey;
         private Object readResolve() {
-            return new AscendingSubMap<>(TreeMap.this,
-                                         fromStart, fromKey, true,
-                                         toEnd, toKey, false);
+            return new AscendingSubMap<>(TreeMap.this, fromStart, fromKey, true,
+                    toEnd, toKey, false);
         }
         @Override
         public Set<Entry<K,V>> entrySet() { throw new InternalError(); }
@@ -2487,7 +2502,10 @@ public class TreeMap<K,V> extends AbstractMap<K,V>
         }
     }
 
-    /** From CLR */
+    /**
+     * From CLR。
+     * "CLR" 是三人的缩写，即 Cormen，Leiserson 和 Rivest，它们是《算法导论》第一版的作者。
+     */
     private void fixAfterInsertion(Entry<K,V> x) {
         x.color = RED;
 
