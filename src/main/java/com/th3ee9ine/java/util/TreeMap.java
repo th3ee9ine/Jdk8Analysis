@@ -565,7 +565,7 @@ public class TreeMap<K,V> extends AbstractMap<K,V>
             // 8、如果比较结果大于 0，则将 entry 存放在右节点
             parent.right = e;
         }
-        // 9、插入新的节点后，对树的结构进行修正
+        // 9、插入新的节点后，对树的结构进行修正（维持红黑树的平衡）
         fixAfterInsertion(e);
         // 10、节点数加1
         size++;
@@ -2503,13 +2503,27 @@ public class TreeMap<K,V> extends AbstractMap<K,V>
     }
 
     /**
-     * From CLR。
-     * "CLR" 是三人的缩写，即 Cormen，Leiserson 和 Rivest，它们是《算法导论》第一版的作者。
+     * From CLR ("CLR" 是三人的缩写，即 Cormen，Leiserson 和 Rivest，它们是《算法导论》第一版的作者。)。
+     * 作用：红黑树添加节点后，平衡修复。
+     *
+     * TreeMap采用红黑树进行构建，红黑树是一种自平衡二叉查找树。
+     * 插入、删除、查找的时间复杂度为 O(logn)。
+     * 与另一个自平衡二叉查找树AVL Tree相比，红黑树以减少旋转操作牺牲部分平衡性，但是其整体性能优于 AVL Tree。
+     *
+     * 红黑树特性：
+     *
+     * 1、节点是红色或黑色。
+     * 2、根是黑色。
+     * 3、所有叶子都是黑色（叶子是NULL节点）。
+     * 4、每个红色节点必须有两个黑色的子节点（从每个叶子到根的所有路径上不能有两个连续的红色节点）。
+     * 5、从任一节点到其每个叶子的所有简单路径都包含相同数目的黑色节点。
      */
     private void fixAfterInsertion(Entry<K,V> x) {
+        // 1、将 x 节点的颜色赋值为红色
         x.color = RED;
-
+        // 2、
         while (x != null && x != root && x.parent.color == RED) {
+            // 2.1、
             if (parentOf(x) == leftOf(parentOf(parentOf(x)))) {
                 Entry<K,V> y = rightOf(parentOf(parentOf(x)));
                 if (colorOf(y) == RED) {
