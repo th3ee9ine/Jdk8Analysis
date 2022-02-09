@@ -2523,7 +2523,6 @@ public class TreeMap<K,V> extends AbstractMap<K,V>
         x.color = RED;
         // 2、
         while (x != null && x != root && x.parent.color == RED) {
-            // 2.1、
             if (parentOf(x) == leftOf(parentOf(parentOf(x)))) {
                 Entry<K,V> y = rightOf(parentOf(parentOf(x)));
                 if (colorOf(y) == RED) {
